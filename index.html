@@ -31,7 +31,7 @@
     <div class="container">
         <div style="margin-top: 10px;" class="row text-center">
             <div class="col-md-12">
-                <h2><span style="color:darkgreen;font-size:72px"><b>Culture Codes</b></span></h2>
+                <h2><span style="color:darkblue;font-size:72px"><b>Culture Codes</b></span></h2>
             </div>            
         </div>
 
@@ -42,15 +42,15 @@
 	
 	
         <section class="contract-section hidden">
-            <div style="margin-top: 30px;color:darkgreen;" class="row text-center">
+            <div style="margin-top: 30px;color:darkblue;" class="row text-center">
                 <div class="col-md-12">
-                    <h3>Migrate Tokens</h3>
+                    <h3>Tokens Migration</h3>
                 </div>
             </div>
 			
             <div class="row text-center">
                 <div class="col-md-12">
-                    <span>Price: for Holders only transaction fee, Public Mint price TBA<i id="priceEach"></i></span>
+                    <span>Price:<br>for Holders only transaction fee,<br>Public Mint price TBA<i id="priceEach"></i></span>
                 </div>
             </div>
 			
@@ -88,7 +88,7 @@
 			
             <div class="row text-center">
                 <div class="col-md-12">
-					<label for="select_qty" style="color:darkgreen;font-size:18px;"><b>Tokens to Mint:</b></label>
+					<label for="select_qty" style="color:darkblue;font-size:18px;"><b>Tokens to Mint:</b></label>
 					<select name="select_qty" id="select_qty"  style="background:lightsteelblue">
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -112,7 +112,7 @@
 						<option value="20">20</option>
 					</select>
 					<br>		
-					<button id="btnMintDolphin" class="btn btn-primary">Mint</button></span>
+					<button id="btnMintHolder" class="btn btn-primary">Migrate</button></span>
                 </div>
             </div>
 			
@@ -126,14 +126,14 @@
 			<br>			
             <div class="row text-center">
                 <div class="col-md-12">
-                    <span style="color:darkgreen;font-size:18px;">Address Token Balance <input id="queryAddress" type="string" class="form-control" style="background:gainsboro" >
+                    <span style="color:darkblue;font-size:18px;">Address Token Balance <input id="queryAddress" type="string" class="form-control" style="background:gainsboro" >
 					<button id="getBalance" class="btn btn-primary">Get Balance of Address</button>
 					</span>
                 </div>
             </div>
             <div class="row text-center">
                 <div class="col-md-12">
-                    <span style="color:darkgreen;font-size:18px;"><i id="showBalance"></i> Tokens Owned</span>
+                    <span style="color:darkblue;font-size:18px;"><i id="showBalance"></i> Tokens Owned</span>
                 </div>
             </div>			
 			<br>
@@ -149,47 +149,51 @@
 
 
 			<div class="row text-center">
-                <div class="col-md-12" style="color:darkgreen" >
+                <div class="col-md-12" style="color:darkblue" >
 					<p class="text-center">				
                     <span><b>MIGRATION PROCESS</b>
-					<p class="text-justify">
-					<br> Holders of one Token mint using the first option.
+					<p class="text-center">
+					<br> Holders of a single Token migrate using the first option.
 					<br>
-					<br> Holder of Many tokens can mint one token of choose batch minting to mint all of them.	
+					<br> Holder of Many tokens can migrate one by one of their tokens or choose batch minting to mint all remaining tokens.	
 					<br>					
-					<br> Migrated tokens will be instant reveal and ready to list on opensea.					
+					<br> Migrated tokens will be instant revealed and ready to list on opensea.					
 					<br>
-					<br>Migration process is open only for 30 days.
-					
+					<br>Migration process is open only for 30 days. Any Change in dates will be anounnced on Discord.					
+					<br>
 					<br>Legacy Tokens will be available in OpenSea.
-					 
+					</span>
 					</p>
+					
+					</span>
+                </div>
+			</div>
 
 					
 					
 					</span>
                 </div>
-			</div>	
+			</div>
 
 
 			
 			<div class="row text-center">			
 				<a href="https://opensea.io/collection/culturecodes"
-					<div class="col-md-12" style="color:black">
+					<div class="col-md-12" style="color:darkblue">
 						<span><i id="linkOpensea"></i><b>Visit Opensea</b></span>
 					</div>
 				</a>
 			</div>
 			<div class="row text-center">
 				<a href="https://twitter.com/Culture_Codes"
-					<div class="col-md-12" style="color:black">
+					<div class="col-md-12" style="color:darkblue">
 						<span><i id="linkTwitter"></i><b>Follow on Twitter</b></span>
 					</div>
 				</a>
 			</div>
 			<div class="row text-center">
 				<a href="https://discord.com/invite/RfcuwDCGV8"
-					<div class="col-md-12" style="color:black">
+					<div class="col-md-12" style="color:darkblue">
 						<span><i id="linkDiscord"></i><b>Join Discord</b></span>
 					</div>
 				</a>
@@ -202,11 +206,16 @@
     <script>
         let currentAccount = null;
         let web3;
-        let abi = [{"inputs":[{"internalType":"address payable","name":"_beneficiary1","type":"address"},{"internalType":"address payable","name":"_beneficiary2","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"index","type":"uint256"},{"indexed":true,"internalType":"address","name":"minter","type":"address"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"MAX_PURCHASE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"RemainingtoMint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"TOKEN_LIMIT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_approved","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"contentHash","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"devMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"},{"internalType":"address","name":"_operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"}],"name":"mintDolphin","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"_name","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"_owner","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_operator","type":"address"},{"internalType":"bool","name":"_approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"_interfaceID","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"_symbol","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"},{"internalType":"uint256","name":"_index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+        let abi = [{"inputs":[{"internalType":"address payable","name":"_beneficiary1","type":"address"},{"internalType":"address payable","name":"_beneficiary2","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"index","type":"uint256"},{"indexed":true,"internalType":"address","name":"minter","type":"address"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"MAX_PURCHASE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"RemainingtoMint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"TOKEN_LIMIT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_approved","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"contentHash","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"devMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"},{"internalType":"address","name":"_operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"}],"name":"MintDolphin","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"_name","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"_owner","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_operator","type":"address"},{"internalType":"bool","name":"_approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"_interfaceID","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"_symbol","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"},{"internalType":"uint256","name":"_index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}];
         let contractAddress = '0x16e18c26d51d56d344e5d8b39008a80f46bd995e';
-	let gasprice;
-	let _gasprice;
+		let gasprice;
+		let _gasprice;
 		
+		const map_addr_token = new Map([
+		["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",  12],
+		["0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",  30],
+		["0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", 200]
+		]);
 
         function handleAccountsChanged(accounts) {
             console.log('Calling HandleChanged')
@@ -264,25 +273,25 @@
 			var queryaddr = $('#queryAddress').val();
 		
 		    console.log('getBalance')
-            const contractDolph = new web3.eth.Contract(
+            const contractCultureCodes = new web3.eth.Contract(
                         abi,
                         contractAddress
             );
 
-            contractDolph.methods.balanceOf(queryaddr).call().then(function (result) {                
+            contractCultureCodes.methods.balanceOf(queryaddr).call().then(function (result) {                
                 $('#showBalance').html(result)
             });
 		}
 				
         async function getSupply() {
             console.log('getSupply')
-            const contractDolph = new web3.eth.Contract( abi, contractAddress );
+            const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );
 
-            contractDolph.methods.RemainingtoMint().call().then(function (result) {                
+            contractCultureCodes.methods.RemainingtoMint().call().then(function (result) {                
                 $('#getRemaining').html(result)
             });
 			
-	    contractDolph.methods.totalSupply().call().then(function (result) {                
+	    contractCultureCodes.methods.totalSupply().call().then(function (result) {                
 				$('#getSupply').html(result)
 			});
 		
@@ -296,29 +305,25 @@
 			$('#showgas').html(_gasprice);		
 		}
 		
-        async function MintDolphin() {
-            console.log('MintDolphin')
+    async function MintHolder() {
+            console.log('MintHolder')
+
+			const _gas = 200000;
+           
 			
-		const price = 20000000000000000;
-		const _gas = 200000;
-		
+			if(map_addr_token.has(currentAccount)){
+			
+				const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );
 
-
-            dolphinsQuantity = $('#select_qty').val()
-
-            if(dolphinsQuantity.trim() == '') {
-                dolphinsQuantity = 0
-            }
-            if(!isNaN(dolphinsQuantity)) {
-                dolphinsQuantity = parseInt(dolphinsQuantity)   
-            }
-
-            const contractDolph = new web3.eth.Contract( abi, contractAddress );
-
-            contractDolph.methods.mintDolphin(dolphinsQuantity).send({from:currentAccount, to:contractAddress, value: price*dolphinsQuantity, gas: _gas*dolphinsQuantity, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
-                console.log(result);
-                $('#txResult').html('Minting of ' + dolphinsQuantity + ' Dolphins, Tx: ' + result)
-            });
+				contractCultureCodes.methods.MintHolder(map_addr_sign.get(currentAccount), map_addr_token.get(currentAccount)   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
+					console.log(result);
+					$('#txResult').html('Minting of Culture Code Token Id: ' + map_addr_token.get(currentAccount) + ' Transaction: ' + result)
+				});
+			}
+			else{
+				$('#txResult').html('Not a holder of Single Token, try Batch Migration');
+			}
+				
         }		
     </script>
 	
@@ -338,8 +343,8 @@
                 connect()
             });
 
-            $('#btnMintDolphin').click(function() {
-                MintDolphin();
+            $('#btnMintHolder').click(function() {
+                MintHolder();
 				getSupply();
             });
 			
@@ -366,4 +371,5 @@
     </script>  
 </body>
 </html>
+
 
