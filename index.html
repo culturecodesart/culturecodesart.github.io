@@ -31,14 +31,14 @@
     <div class="container">
         <div style="margin-top: 10px;" class="row text-center">
             <div class="col-md-12">
-                <h2><span style="color:darkblue;font-size:72px"><b>Culture Codes</b></span></h2>
+                <h2><span style="color:darkblue;font-size:80px"><b>Culture Codes</b></span></h2>
             </div>            
         </div>
 
         </div>
 	    
 	    
-	<br><br>
+		<br>
 	
 	
         <section class="contract-section hidden">
@@ -50,7 +50,7 @@
 			
             <div class="row text-center">
                 <div class="col-md-12">
-                    <span>Price:<br>for Holders only transaction fee,<br>Public Mint price TBA<i id="priceEach"></i></span>
+                    <span>Price:<br>Free for Holders, only transaction fee,<br>Public Mint price TBA for non claimed<i id="priceEach"></i></span>
                 </div>
             </div>
 			
@@ -71,12 +71,12 @@
 					<button id="updategas" class="btn btn-info btn-sm">update</button></span>
                 </div>
             </div>
-	    <br><br>
+
 		
 		
 	<div style="margin-top: 10px;" class="row text-center">
 		<div class="col-md-12">
-                	<button id="enableMetamask" class="btn btn-primary">Connect with Metamask</button>
+                	<button id="enableMetamask" class="btn btn-primary"><b>Connect Metamask</b</button>
             	</div>
 	</div>
         <div class="row text-center">
@@ -84,35 +84,19 @@
                 <span id="status"></span>
             </div>
         </div>
-	<br>
+	<br><br>
 			
             <div class="row text-center">
-                <div class="col-md-12">
-					<label for="select_qty" style="color:darkblue;font-size:18px;"><b>Tokens to Mint:</b></label>
-					<select name="select_qty" id="select_qty"  style="background:lightsteelblue">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-					</select>
-					<br>		
-					<button id="btnMintHolder" class="btn btn-primary">Migrate</button></span>
+                <div class="col-md-12">							
+					<button id="btnMintHolder" class="btn btn-primary"><b>Migrate Unique Token</b</button></span>
+                </div>
+            </div>
+			<br>
+			<br>
+			
+			<div class="row text-center">
+                <div class="col-md-12">							
+					<button id="btnMintHolderBatch" class="btn btn-primary"><b>Migrate All Token</b</button></span>
                 </div>
             </div>
 			
@@ -125,11 +109,13 @@
 			<br>
 			<br>			
             <div class="row text-center">
-                <div class="col-md-12">
+				<div class="col-md-4"></div>
+                <div class="col-md-4">
                     <span style="color:darkblue;font-size:18px;">Address Token Balance <input id="queryAddress" type="string" class="form-control" style="background:gainsboro" >
 					<button id="getBalance" class="btn btn-primary">Get Balance of Address</button>
 					</span>
                 </div>
+				<div class="col-md-4"></div>
             </div>
             <div class="row text-center">
                 <div class="col-md-12">
@@ -149,23 +135,30 @@
 
 
 			<div class="row text-center">
-                <div class="col-md-12" style="color:darkblue" >
+			    <div class="col-md-3" style="color:darkblue" >
+
+                </div>
+                <div class="col-md-6" style="color:darkblue" >
 					<p class="text-center">				
-                    <span><b>MIGRATION PROCESS</b>
-					<p class="text-center">
+                    <br>
+					<span><b>MIGRATION PROCESS</b>
+					<p class="text-justify">
 					<br> Holders of a single Token migrate using the first option.
 					<br>
-					<br> Holder of Many tokens can migrate one by one of their tokens or choose batch minting to mint all remaining tokens.	
+					<br> Holder of many Tokens can migrate them one by one or select batch minting to migrate remaining tokens.	
 					<br>					
 					<br> Migrated tokens will be instant revealed and ready to list on opensea.					
 					<br>
 					<br>Migration process is open only for 30 days. Any Change in dates will be anounnced on Discord.					
 					<br>
-					<br>Legacy Tokens will be available in OpenSea.
+					<br>Legacy Tokens will stay available in OpenSea. No burning requiered.
 					</span>
 					</p>
 					
 					</span>
+                </div>
+				<div class="col-md-3" style="color:darkblue" >
+
                 </div>
 			</div>
 
@@ -215,6 +208,18 @@
 		["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",  12],
 		["0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",  30],
 		["0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", 200]
+		]);
+		
+		const map_token_sign = new Map([
+		["12",  "0x96ae69c74a645654d74b1931efb04ac1ca4c0c18874360bc4b6ea97fa9ca9a4b7f77d0c65424a6cb2c20cfafe46962ae88d1ff8608c678506fc239ea1efba5811b"],
+		["30",  "0xdd3d7246ddf9e815a045e640520e65e1992cf7781d8c5848ed511bc06ae89a5837258fe481cd624940f9614bd8980a78ddcc175323e8d584feceb57f12ba32021b"],
+		["200", "0x6b498b633cc531e77fe3386f92bd5dab13796dae972e7f64079427be17ed3bc810807364043224bf0cc324cefb19dc361740a9a60ba91149866189d099a7f11b1c"]
+		]);
+		
+		const map_addr_tokenlistsign = new Map([
+		["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x86c097cdb611cfc720c9001fc8322955cb1b6d327c3bdb10e7bd458ece6e1b511c1aa9948aa5e410f0e149769f4ae216acfac5cd1639662eba74ec8e5ac30faf1c"],
+		["0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2", "0x4dd7103880a9d5882440052e6a91b06e7f9c874b74837d45d04f4db2d4ec416a6ed14116b3525e05fe892b3143e1f41fb1972ffc1cf3cdce9752fea4f7cf55151b"],
+		["0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", "0x817437c6bbdc31b6b57522e2c08f158399246d6700836fa933f05198527d1b184d048b5e99a2561f6e8d46dcd2526befe9a58e39d1b4bbf8661120172c4978781b"]
 		]);
 
         function handleAccountsChanged(accounts) {
@@ -371,5 +376,3 @@
     </script>  
 </body>
 </html>
-
-
