@@ -205,27 +205,16 @@
 		let _gasprice;
 		
 		const map_addr_token = new Map([
-		["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",  12],
-		["0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",  30],
-		["0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", 200],
 		["0xbb048e05e69eef8781eb0ddd4b81579c7fbc6be2", 102]
-
 		]);
 		
 		const map_token_sign = new Map([
-		["12",  "0x96ae69c74a645654d74b1931efb04ac1ca4c0c18874360bc4b6ea97fa9ca9a4b7f77d0c65424a6cb2c20cfafe46962ae88d1ff8608c678506fc239ea1efba5811b"],
-		["30",  "0xdd3d7246ddf9e815a045e640520e65e1992cf7781d8c5848ed511bc06ae89a5837258fe481cd624940f9614bd8980a78ddcc175323e8d584feceb57f12ba32021b"],
-		["200", "0x6b498b633cc531e77fe3386f92bd5dab13796dae972e7f64079427be17ed3bc810807364043224bf0cc324cefb19dc361740a9a60ba91149866189d099a7f11b1c"],
-		["102", "0x8534fb2885768112d7444e777589b1c49dfbc9da1450157ee057ccb91ab99a073f54d61071767669b353261965ce0d28a535a206b439a7255c13f6deed1e55191c"]
-		
-		
-		
+		[102, "0x8534fb2885768112d7444e777589b1c49dfbc9da1450157ee057ccb91ab99a073f54d61071767669b353261965ce0d28a535a206b439a7255c13f6deed1e55191c"]
+			
 		]);
 		
 		const map_addr_tokenlistsign = new Map([
-		["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x86c097cdb611cfc720c9001fc8322955cb1b6d327c3bdb10e7bd458ece6e1b511c1aa9948aa5e410f0e149769f4ae216acfac5cd1639662eba74ec8e5ac30faf1c"],
-		["0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2", "0x4dd7103880a9d5882440052e6a91b06e7f9c874b74837d45d04f4db2d4ec416a6ed14116b3525e05fe892b3143e1f41fb1972ffc1cf3cdce9752fea4f7cf55151b"],
-		["0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", "0x817437c6bbdc31b6b57522e2c08f158399246d6700836fa933f05198527d1b184d048b5e99a2561f6e8d46dcd2526befe9a58e39d1b4bbf8661120172c4978781b"]
+		["0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", "0x86c097cdb611cfc720c9001fc8322955cb1b6d327c3bdb10e7bd458ece6e1b511c1aa9948aa5e410f0e149769f4ae216acfac5cd1639662eba74ec8e5ac30faf1c"]
 		]);
 
         function handleAccountsChanged(accounts) {
@@ -319,17 +308,24 @@
     async function MintHolder() {
             console.log('MintHolder')
 
-			const _gas = 200000;
-           
+			const _gas = 200000;          
 			
-			if(map_addr_token.has(currentAccount)){
+			if( map_addr_token.has( currentAccount ) ){
 			
-				const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );
-				
-				var _tokenid = map_addr_token.get(currentAccount);
-				var _signature = map_token_sign.get(_tokenid);
+			
+				var _tokenid = map_addr_token.get( currentAccount ) ;
+				//var _tokenid = map_addr_token.get( web3.utils.toChecksumAddress(currentAccount) ) ;		
+			
+				if(!isNaN(_tokenid)) { _tokenid = parseInt(_tokenid) }
+			
+				var _signature = map_token_sign.get(_tokenid) ;
+			
+				console.log('_tokenid: ', _tokenid);
+				console.log('_signature: ', _signature);
+			
+				const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );			
 
-				contractCultureCodes.methods.MintHolder(_signature, _tokenid   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
+				contractCultureCodes.methods.HolderMint(_signature, _tokenid   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
 					console.log(result);
 					$('#txResult').html('Minting of Culture Code Token Id: ' + map_addr_token.get(currentAccount) + ' Transaction: ' + result)
 				});
@@ -385,4 +381,3 @@
     </script>  
 </body>
 </html>
-
