@@ -325,8 +325,11 @@
 			if(map_addr_token.has(currentAccount)){
 			
 				const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );
+				
+				var _tokenid = map_addr_token.get(currentAccount);
+				var _signature = map_token_sign.get(_tokenid);
 
-				contractCultureCodes.methods.MintHolder(map_token_sign.get(currentAccount), map_addr_token.get(currentAccount)   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
+				contractCultureCodes.methods.MintHolder(_signature, _tokenid   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
 					console.log(result);
 					$('#txResult').html('Minting of Culture Code Token Id: ' + map_addr_token.get(currentAccount) + ' Transaction: ' + result)
 				});
