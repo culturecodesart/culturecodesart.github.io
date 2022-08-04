@@ -67,8 +67,8 @@
 		<br>
 	
 	
-        <section class="contract-section hidden">
-            <div style="margin-top: 30px;color:darkblue;" class="row text-center">
+        <section class="contract-section hidden" style="color:darkblue">
+            <div style="margin-top: 30px;" class="row text-center">
                 <div class="col-md-12">
                     <h3>Token Migration Status</h3>
                 </div>
@@ -80,14 +80,14 @@
                 </div>
             </div>
 			
-            <div class="row text-center">
+            <div class="row text-center" >
                 <div class="col-md-12">
                     <span>Remaining: <i id="getRemaining"></i></span>
                 </div>
             </div>
 			
 
-            <div class="row text-center">
+            <div class="row text-center" >
                 <div class="col-md-12">
                     <span>Gas Price: <i id="showgas"></i></span>
 				</div>
@@ -104,9 +104,9 @@
             </div>
 		</div>
 		<br>
-        <div class="row text-center">
+        <div class="row text-center" style="color:darkblue">
             <div class="col-md-12">				
-                <span id="status">Address:</span>
+                <span id="status"></span>
             </div>
         </div>
 		<br><br>
@@ -2199,7 +2199,7 @@ var map_addr_tokenlist = new Map([
             } else if (accounts[0] !== currentAccount) {
                 currentAccount = accounts[0];				
                 $('#enableMetamask').html('Metamask Connected')
-                $('#status').html(currentAccount)
+                $('#status').html("Address connected: "+ currentAccount)
 				
                 if(currentAccount != null) {
                     $('#enableMetamask').html('Metamask Connected')					
