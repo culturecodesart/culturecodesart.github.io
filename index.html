@@ -203,8 +203,17 @@
         let contractAddress = '0xB5C0860815f9142Bd5E8e55Aae21cdAe0169182d';
 		let gasprice;
 		let _gasprice;
+	    
+	    	const map_addr_token_ = new Map([
+			["0xb7cefe94eb5cd39b4b68b1f74ded1c8c29fb5c50",102]			
+			]);
+	   
 		
-		const map_addr_token = new Map([
+		const map_token_sign = new Map([	    
+	    		[102,"0xb346209978f578d85a6c9ed0bf3b2e50d5d34231a4f22f8710fde1165a723c69211f5343bffd7910138318cf530b35d787a878e39504513f758f2966ebc38d1b1c"]
+			]);
+		
+		const map_addr_token_ = new Map([
 		
 ["0xbb048e05e69eef8781eb0ddd4b81579c7fbc6be2",102],
 ["0x49943a23e7ea4fcbb28d430ee5ed04b794fa3fc7",740],
@@ -474,7 +483,7 @@
 
 		]);
 		
-		const map_token_sign = new Map([
+		const map_token_sign_ = new Map([
 [1,"0xb677c16c445a5493bd357e1066c4f38a677f8b367806cada1d616eb8cde68f4138081cc8abf7b194bffb25673c05181699f1f659dd88c8b75820cba3b26ea95e1c"],
 [2,"0xe25f8e7ba229f27d594b51dabc02665aaa9c7f712c37f036794b3a371f97788d5e5fefcd1154bf2f323215ed0c25eaadc9f84cb44bd1454ab0c6094274683e4c1b"],
 [3,"0xb145618d65edf276ac9b94174c135530779bbba16f0ab69c716d9fed04fb858d0e138942e31a074f0a8429285c0e9691785b232ee06c2b51e03f7814c1d82c751b"],
