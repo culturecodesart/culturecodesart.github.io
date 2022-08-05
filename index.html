@@ -49,7 +49,7 @@
     </style>
 	
 	<video autoplay muted loop id="myVideo">
-  	<source src="bellboy-filter.mp4" type="video/mp4">
+  	<source src="wink.mp4" type="video/mp4">
 	</video>
 	
 <div class="content">
@@ -113,17 +113,11 @@
 			
             <div class="row text-center">
                 <div class="col-md-12">							
-					<button id="btnMintHolder" class="btn btn-primary"><b>Migrate Unique Token</b</button></span>
+					<button id="btnMintHolder" class="btn btn-primary"><b>Migrate Tokens</b</button></span>
                 </div>
             </div>
 			<br>
-			<br>
-			
-			<div class="row text-center">
-                <div class="col-md-12">							
-					<button id="btnMintHolderBatch" class="btn btn-primary"><b>Migrate All Your Tokens</b</button></span>
-                </div>
-            </div>			
+			<br>			
             <div class="row text-center">
                 <div class="col-md-12">
                     <span><i id="txResult"></i></span>
@@ -134,26 +128,32 @@
 		
 			<br>
 			
-			<div class="row text-center">				
+			<div class="row text-center" style="color:darkblue">				
 				
 				
-					<div class="col-md-4" style="color:darkblue">
-						<a href="https://opensea.io/collection/culturecodes"
+					<div class="col-md-3" >
+						<a href="https://opensea.io/collection/culturecodesart"
 						<span><i id="linkOpensea"></i><b>Visit Opensea</b></span>
 						</a>
 					</div>
 		    
-		    			<div class="col-md-4" style="color:darkblue">
+		    			<div class="col-md-3" >
 						<a href="https://twitter.com/Culture_Codes"
 						<span><i id="linkTwitter"></i><b>Follow on Twitter</b></span>
 		    				</a>
 					</div>
 		
-					<div class="col-md-4" style="color:darkblue">
+					<div class="col-md-3" >
 						<a href="https://discord.com/invite/RfcuwDCGV8"
 						<span><i id="linkDiscord"></i><b>Join Discord</b></span>
 						</a>
-					</div>		    
+					</div>
+
+					<div class="col-md-3" >
+						<a href="https://etherscan.io/address/0xb5c0860815f9142bd5e8e55aae21cdae0169182d"
+						<span><i id="linkDiscord"></i><b>Etherscan</b></span>
+						</a>
+					</div>					
 		    
 			</div>
 			
@@ -2184,6 +2184,82 @@ var map_addr_tokenlist = new Map([
 ["0x7a6ce9fa83d86d933746e395e9e0e5294f42c478", [738,739] ]
 ]);
 
+
+	async function Migrate() {
+		console.log('Migrate function called')
+		
+		if( map_addr_holds.has(currentAccount) ){
+		
+			if( map_addr_holds.get(currentAccount) == 1 ){
+				MintHolder();
+			}
+			
+			else{
+				HolderMintBatch();
+			}
+		
+		
+		}
+		else{
+				$('#txResult').html('Not a Holder at snapshot time');
+			}
+		
+	
+	}
+
+    async function MintHolder() {
+            console.log('MintHolder')
+
+			const _gas = 200000;          
+			
+			if( map_addr_token.has( currentAccount ) ){			
+			
+				var _tokenid = map_addr_token.get( currentAccount ) ;
+			
+				if(!isNaN(_tokenid)) { _tokenid = parseInt(_tokenid) }
+			
+				var _signature = map_token_sign.get(_tokenid) ;
+			
+				const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );			
+
+				contractCultureCodes.methods.HolderMint(_signature, _tokenid   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
+				console.log(result);
+				$('#txResult').html('Minting of Culture Code Token Id: ' + map_addr_token.get(currentAccount) + ' Transaction: ' + result)
+				});
+			}
+			else{
+				$('#txResult').html('Not a holder of Single Token, try Batch Migration');
+			}
+				
+        }
+		
+		
+	async function HolderMintBatch() {
+            console.log('HolderMintBatch')
+
+			const _gas = parseInt(200000*map_addr_holds.get(currentAccount) );          
+			
+			if( map_addr_tokenlistsign.has( currentAccount ) ){			
+		
+				var _tokenlist = map_addr_tokenlist.get( currentAccount ).slice();
+			
+				var _signature = map_addr_tokenlistsign.get(currentAccount) ;
+			
+				const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );			
+
+				contractCultureCodes.methods.HolderMintBatch(_signature, _tokenlist   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
+				console.log(result);
+				$('#txResult').html('Minting Culture Code Tokens: ' + _tokenlist + ' Transaction: ' + result)
+				});
+			}
+			else{
+				$('#txResult').html('Not a holder of Multiple Tokens, try Unique Migration');
+			}
+				
+        }
+		
+		
+
         function handleAccountsChanged(accounts) {
             console.log('Calling HandleChanged')
 
@@ -2272,56 +2348,7 @@ var map_addr_tokenlist = new Map([
 			$('#showgas').html(_gasprice);		
 		}
 		
-    async function MintHolder() {
-            console.log('MintHolder')
 
-			const _gas = 200000;          
-			
-			if( map_addr_token.has( currentAccount ) ){			
-			
-				var _tokenid = map_addr_token.get( currentAccount ) ;
-			
-				if(!isNaN(_tokenid)) { _tokenid = parseInt(_tokenid) }
-			
-				var _signature = map_token_sign.get(_tokenid) ;
-			
-				const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );			
-
-				contractCultureCodes.methods.HolderMint(_signature, _tokenid   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
-				console.log(result);
-				$('#txResult').html('Minting of Culture Code Token Id: ' + map_addr_token.get(currentAccount) + ' Transaction: ' + result)
-				});
-			}
-			else{
-				$('#txResult').html('Not a holder of Single Token, try Batch Migration');
-			}
-				
-        }
-		
-		
-	async function HolderMintBatch() {
-            console.log('HolderMintBatch')
-
-			const _gas = parseInt(200000*map_addr_holds.get(currentAccount) );          
-			
-			if( map_addr_tokenlistsign.has( currentAccount ) ){			
-		
-				var _tokenlist = map_addr_tokenlist.get( currentAccount ).slice();
-			
-				var _signature = map_addr_tokenlistsign.get(currentAccount) ;
-			
-				const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );			
-
-				contractCultureCodes.methods.HolderMintBatch(_signature, _tokenlist   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
-				console.log(result);
-				$('#txResult').html('Minting Culture Code Tokens: ' + _tokenlist + ' Transaction: ' + result)
-				});
-			}
-			else{
-				$('#txResult').html('Not a holder of Multiple Tokens, try Unique Migration');
-			}
-				
-        }
     </script>
 	
     <script>   
@@ -2341,15 +2368,10 @@ var map_addr_tokenlist = new Map([
             });
 
             $('#btnMintHolder').click(function() {
-                MintHolder();
+                Migrate();
 				getSupply();
             });
-			
-			$('#btnMintHolderBatch').click(function() {
-                HolderMintBatch();
-				getSupply();
-            });
-			
+					
             $('#btngetBalance').click(function() {
                 getBalance()
             });
