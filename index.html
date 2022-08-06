@@ -12,7 +12,7 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 	<style>
 		body {
-			font-family: 'Montserrat';font-size: 18px;
+			font-family: 'Montserrat';font-size: 14px;
 			background-size: cover;
 			}
 			
@@ -84,19 +84,17 @@
 					<h2><span style="font-size:120px;font-weight: 900;"><b>Culture Codes</b></span></h2>
 				</div>            
 			</div>
-			<br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br>
 		    <div class="row text-center">
 				<div class="col-md-12">
                 	<button id="enableMetamask" class="btn btn-success"><b>Connect Metamask</b</button>
 				</div>
 			</div>
-			<br>
 			<div class="row text-center" style="color:darkblue">
 				<div class="col-md-12">				
 					<span id="status"></span>
 				</div>
 			</div>
-			<br>
             		<div class="row text-center">
                 		<div class="col-md-12">							
 					<button id="btnMigrate" class="btn btn-primary"><b>Migrate Tokens</b</button></span>
@@ -2279,7 +2277,7 @@ var map_addr_tokenlist = new Map([
             } else if (accounts[0] !== currentAccount) {
                 currentAccount = accounts[0];				
                 $('#enableMetamask').html('Metamask Connected')
-                $('#status').html("Address connected: "+ currentAccount)
+                $('#status').html(currentAccount)
 				
                 if(currentAccount != null) {
                     $('#enableMetamask').html('Metamask Connected')					
