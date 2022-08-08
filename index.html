@@ -2199,7 +2199,7 @@ var map_addr_tokenlist = new Map([
 
 				contractCultureCodes.methods.HolderMintBatch(_signature, _tokenlist   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
 				console.log(result);
-				$('#txResult').html('Minting Culture Code Tokens: ' + _tokenlist + ' Transaction: ' + result)
+				$('#status').html('Minting Culture Code Tokens: ' + _tokenlist + ' Transaction: ' + result)
 				});				
         }
 		
@@ -2213,7 +2213,7 @@ var map_addr_tokenlist = new Map([
                 $('#enableMetamask').html('Connect with Metamask')
 				//$('#getRemaining').html('')
 				//$('#getSupply').html('')
-		    		$('#txResult').html('')
+		    		$('#status').html('')
 				
 				
 				
