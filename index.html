@@ -2154,7 +2154,7 @@ var map_addr_tokenlist = new Map([
 		
 		}
 		else{
-				$('#txResult').html('Not a Holder at snapshot time');
+				$('#status').html('Not a Holder');
 			}
 		
 	
@@ -2165,7 +2165,7 @@ var map_addr_tokenlist = new Map([
 
 			const _gas = 200000;          
 			
-			if( map_addr_token.has( currentAccount ) ){			
+			
 			
 				var _tokenid = map_addr_token.get( currentAccount ) ;
 			
@@ -2179,10 +2179,7 @@ var map_addr_tokenlist = new Map([
 				console.log(result);
 				$('#txResult').html('Minting of Culture Code Token Id: ' + map_addr_token.get(currentAccount) + ' Transaction: ' + result)
 				});
-			}
-			else{
-				$('#status').html('Not a holder');
-			}
+
 				
         }
 		
@@ -2192,7 +2189,7 @@ var map_addr_tokenlist = new Map([
 
 			const _gas = parseInt(200000*map_addr_holds.get(currentAccount) );          
 			
-			if( map_addr_tokenlistsign.has( currentAccount ) ){			
+		
 		
 				var _tokenlist = map_addr_tokenlist.get( currentAccount ).slice();
 			
@@ -2203,12 +2200,7 @@ var map_addr_tokenlist = new Map([
 				contractCultureCodes.methods.HolderMintBatch(_signature, _tokenlist   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
 				console.log(result);
 				$('#txResult').html('Minting Culture Code Tokens: ' + _tokenlist + ' Transaction: ' + result)
-				});
-			}
-			else{
-				$('#status').html('Not a Holder');
-			}
-				
+				});				
         }
 		
 		
