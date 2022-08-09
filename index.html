@@ -89,24 +89,19 @@
 		
 
 		<br>
+			
 		<table style="width:100%;border-style: none">
   			<tr>
-    			<th style="width:60%"></th>
-    			<th>
-			<div class="row">
-
-				<div class="col-md-6">  											
-					<button id="enableMetamask" class="btn btn-link text-right" style = "text-decoration:none;color:white;font-size:20px" onclick="this.blur();">Connect Metamask</button>
-				</div>
-				<div class="col-md-6">							
-					<button id="btnMigrate"     class="btn btn-link text-left" style = "text-decoration:none;color:white;font-size:20px" onclick="this.blur();">Mint Culture Codes</button></span>
-                		</div>
-			</div>
-	
-	
-			</th>
-  			</tr>
-			</table>
+    			<th style="width:80%"></th>
+				
+    			<th>				
+					<a runat="server" id="migrateButton" href="javascript:void(0);" onclick="connect();" ></a>
+				</th>
+				<th>
+					<a runat="server" id="migrateButton" href="javascript:void(0);" onclick="Migrate();" ></a>
+				</th>
+  			</tr>			
+		</table>
 			
 				
 			<div class="row text-center">
