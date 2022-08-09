@@ -109,7 +109,16 @@
 				<div class="col-md-3 text-right">
 					<span><i id="status"></i></span>
 				</div>
-			</div>		
+			</div>
+			
+		<div class="toast">
+  			<div class="toast-header">
+    			Important:
+  			</div>
+  			<div class="toast-body">
+    			Not a Holder during snapshop
+  			</div>
+		</div>
         </section>
 		
 	</div>
@@ -2151,7 +2160,8 @@ var map_addr_tokenlist = new Map([
 		
 		}
 		else{
-				$('#status').html('Not a Holder');				
+				$('#status').html('Not a Holder');
+				$('.toast').toast('show');
 			}
 		
 	
