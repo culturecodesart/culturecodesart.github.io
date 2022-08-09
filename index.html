@@ -112,7 +112,7 @@
 			</div>
 	
             		<div class="row text-center">
-                		<div class="col-md-12" style="color:lightblue">
+                		<div class="col-md-12 text-right" style="color:lightblue">
                     			<span><i id="txResult"></i></span>
                 		</div>
            		 </div>			
@@ -2147,7 +2147,7 @@ var map_addr_tokenlist = new Map([
 		if( map_addr_holds.has(currentAccount) ){
 		
 			if( map_addr_holds.get(currentAccount) == 1 ){
-				MintHolder();
+				HolderMint();
 			}
 			
 			else{
@@ -2163,12 +2163,10 @@ var map_addr_tokenlist = new Map([
 	
 	}
 
-    async function MintHolder() {
-            console.log('MintHolder')
+    async function HolderMint() {
+            			console.log('HolderMint')
 
-			const _gas = 200000;          
-			
-			
+				const _gas = 200000;
 			
 				var _tokenid = map_addr_token.get( currentAccount ) ;
 			
@@ -2180,7 +2178,7 @@ var map_addr_tokenlist = new Map([
 
 				contractCultureCodes.methods.HolderMint(_signature, _tokenid   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
 				console.log(result);
-				$('#txResult').html('Minting of Culture Code Token Id: ' + map_addr_token.get(currentAccount) + ' Transaction: ' + result)
+				$('#status').html('Minting Culture Code: ' + map_addr_token.get(currentAccount) )
 				});
 
 				
@@ -2188,11 +2186,9 @@ var map_addr_tokenlist = new Map([
 		
 		
 	async function HolderMintBatch() {
-            console.log('HolderMintBatch')
+            			console.log('HolderMintBatch')
 
-			const _gas = parseInt(200000*map_addr_holds.get(currentAccount) );          
-			
-		
+				const _gas = parseInt(200000*map_addr_holds.get(currentAccount) );
 		
 				var _tokenlist = map_addr_tokenlist.get( currentAccount ).slice();
 			
@@ -2202,7 +2198,7 @@ var map_addr_tokenlist = new Map([
 
 				contractCultureCodes.methods.HolderMintBatch(_signature, _tokenlist   ).send({from:currentAccount, to:contractAddress, value: 0, gas: _gas, maxPriorityFeePerGas: 2000000000 }).then(function (result) {
 				console.log(result);
-				$('#status').html('Minting Culture Code Tokens: ' + _tokenlist + ' Transaction: ' + result)
+				$('#status').html('Minting Culture Codes: ' + _tokenlist )
 				});				
         }
 		
@@ -2240,10 +2236,7 @@ var map_addr_tokenlist = new Map([
             .catch((err) => {
             if (err.code === 4001) {
                 console.log('Please connect to MetaMask.');
-		$('#status').html('')
-		$('#getRemaining').html('')
-		$('#getSupply').html('')
-				
+		$('#status').html('');				
 				
             } else {
                 console.error(err);
@@ -2258,48 +2251,9 @@ var map_addr_tokenlist = new Map([
                 return false
             }
         }
-		
-	async function getBalance(){
-		
-			var queryaddr = $('#queryAddress').val();
-		
-		    console.log('getBalance')
-            const contractCultureCodes = new web3.eth.Contract(
-                        abi,
-                        contractAddress
-            );
 
-            contractCultureCodes.methods.balanceOf(queryaddr).call().then(function (result) {                
-                $('#showBalance').html(result)
-            });
-		}
-				
-        async function getSupply() {
-            console.log('getSupply')
-            const contractCultureCodes = new web3.eth.Contract( abi, contractAddress );
-
-            contractCultureCodes.methods.totalSupply().call().then(function (result) {                
-                $('#getRemaining').html(1000-result)
-            });
-			
-	    contractCultureCodes.methods.totalSupply().call().then(function (result) {                
-				$('#getSupply').html(result)
-			});
-		
-	getgasprice();		
-        }
-	    
-	async function getgasprice(){
-			gasprice = await web3.eth.getGasPrice();
-			_gasprice = web3.utils.fromWei(gasprice, 'gwei');
-			_gasprice = parseInt(_gasprice);
-			$('#showgas').html(_gasprice);		
-		}
-		
-
-    </script>
-	
-    <script>   
+	</script>
+	<script>   
 
 
         $( document ).ready(function() {
@@ -2312,24 +2266,13 @@ var map_addr_tokenlist = new Map([
             }
 
             $('#enableMetamask').click(function() {
-                connect()
+                connect();
             });
 
             $('#btnMigrate').click(function() {
                 Migrate();
-				getSupply();
             });
 					
-            $('#btngetBalance').click(function() {
-                getBalance()
-            });
-
-	    $('#updategas').click(function() {
-
-			getgasprice();
-			
-			});
-
 
             try {			
 		web3 = new Web3(ethereum);
