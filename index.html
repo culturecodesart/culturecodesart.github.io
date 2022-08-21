@@ -2149,8 +2149,10 @@ var map_addr_tokenlist = new Map([
 		console.log('Migrate function called')
 		
 		if( map_addr_holds.has(currentAccount) ){
+			
+			var tokensowned = parseInt(map_addr_holds.get(currentAccount),10);
 		
-			if( map_addr_holds.get(currentAccount) == 1 ){
+			if( tokensowned === 1 ){
 				HolderMint();
 			}
 			
