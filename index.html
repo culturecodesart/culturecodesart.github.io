@@ -2247,6 +2247,10 @@ var map_addr_tokenlist = new Map([
                 console.error(err);
             }
             });
+		
+		
+		web3.eth.personal.getAccounts()
+.then(console.log);
         }
 
         function detectMetaMask() {
