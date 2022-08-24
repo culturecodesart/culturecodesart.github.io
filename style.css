@@ -1,0 +1,54 @@
+
+		body {
+			font-family: 'Montserrat';font-size: 18px;
+			background-size: cover;
+			}
+			
+			
+			
+			.video-background-holder {
+			position: relative;
+			background-color: white;
+			height: calc(100vh);
+			min-height: 25rem;
+			width: 100%;
+			overflow: hidden;
+			}
+			
+			.video-background-holder video {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			min-width: 100%;
+			min-height: 100%;
+			width: 100%;
+			height: auto;
+			z-index: 0;
+				
+			-ms-transform: translateX(-50%) translateY(-50%);
+			-moz-transform: translateX(-50%) translateY(-50%);
+			-webkit-transform: translateX(-50%) translateY(-50%);
+			transform: translateX(-50%) translateY(-50%);
+			
+			}
+			
+			.video-background-content {
+			position: relative;			
+			width: 100%;
+			z-index: 2;
+			}
+			
+			.video-background-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			background-color: white;
+			opacity: 0.0;
+			z-index: 1;
+			}
+		:focus:not(.focus-visible) {
+  			outline: 0;
+  			box-shadow: none;
+			}
